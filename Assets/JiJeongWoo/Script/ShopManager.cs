@@ -18,6 +18,7 @@ public class ShopManager : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Q))
 		{
 			Gold += 100;
+			Debug.Log("100G 지급");
 			GoldReferesh();
 		}
 	}
@@ -27,7 +28,7 @@ public class ShopManager : MonoBehaviour
 		if (Gold >= int.Parse(GameObject.Find(EventSystem.current.currentSelectedGameObject.name).transform.GetChild(0).GetComponent<Text>().text.Split('G')[0]))
 		{
 			Gold -= int.Parse(GameObject.Find(EventSystem.current.currentSelectedGameObject.name).transform.GetChild(0).GetComponent<Text>().text.Split('G')[0]);
-			Debug.Log(EventSystem.current.currentSelectedGameObject.name + "을(를) " + int.Parse(GameObject.Find(EventSystem.current.currentSelectedGameObject.name).transform.GetChild(0).GetComponent<Text>().text.Split('G')[0]) + "G에 구입했어");
+			Debug.Log(EventSystem.current.currentSelectedGameObject.name + "을(를) " + int.Parse(GameObject.Find(EventSystem.current.currentSelectedGameObject.name).transform.GetChild(0).GetComponent<Text>().text.Split('G')[0]) + "G에 구입했다");
 			GoldReferesh();
 		}
 		else
