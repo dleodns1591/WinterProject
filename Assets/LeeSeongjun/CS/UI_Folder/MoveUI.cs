@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MoveUI : MonoBehaviour
 {
-    public int Spot = 0;
     public GameObject rightArrow;
     public GameObject leftArrow;
     
@@ -23,7 +22,7 @@ public class MoveUI : MonoBehaviour
             Debug.Log("UI열림");
             rightArrow.SetActive(false); //오른쪽 열림 , 비활성화
             leftArrow.SetActive(true); // 왼쪽은 활성화
-            oc.Spot++;
+            oc.Spot = 1;
         }
         else if (oc.Spot == 1 )
         {

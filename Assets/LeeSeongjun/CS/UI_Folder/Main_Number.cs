@@ -7,6 +7,7 @@ public class Main_Number : MonoBehaviour
     private RectTransform rectTransform;
     public int Spot = 0;
     public int countN = 0;
+    public int Long_UI_Number = 0;
     private float xMove, yMove;
 
     Vector2 opentarget = new Vector2(840, 0);
