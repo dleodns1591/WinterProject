@@ -31,7 +31,7 @@ public class Main_Number : MonoBehaviour
                 rectTransform.Translate(vec);
                 countN++;
             }
-        } 
+        }
         if (Spot == 1)
         {
             if (countN == 0)
