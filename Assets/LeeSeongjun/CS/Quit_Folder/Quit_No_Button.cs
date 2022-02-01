@@ -9,6 +9,7 @@ public class Quit_No_Button : MonoBehaviour
     public void OnClickTitle_Quit_No()
     {
         Invoke("SceneMove", 0.15f);
+        Debug.Log("종료창 열기");
     }
     void SceneMove()
     {
