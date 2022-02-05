@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class MapManager : MonoBehaviour
 {
 	public GameObject Block;
-	public int[,] MapDesign = new int[8, 2];
+	public int[,] MapDesign = new int[15, 2];
 	public GameObject BlockCanvas;
 
 	void Start()
@@ -21,7 +21,7 @@ public class MapManager : MonoBehaviour
 
 	void MapCreate()
 	{
-		for (int i = 0; i < 8; i++)
+		for (int i = 0; i < 15; i++)
 		{
 			for (int j = 0; j < 2; j++)
 			{
@@ -42,7 +42,7 @@ public class MapManager : MonoBehaviour
 					}
 				}
 				//Debug.Log(MapDesign[i, j]);
-				GameObject BlockSet = Instantiate(Block, new Vector2((-4.0f + i) * 108, (3.0f - j) * 108), Quaternion.identity);
+				GameObject BlockSet = Instantiate(Block, new Vector2((-7.5f + i) * 108, (3.0f - j) * 108), Quaternion.identity);
 				BlockSet.transform.SetParent(BlockCanvas.transform, false);
 				if (MapDesign[i, j] == 1)
 				{
@@ -70,10 +70,10 @@ public class MapManager : MonoBehaviour
 				}
 			}
 		}
-		GameObject BlockSet1 = Instantiate(Block, new Vector2(4.0f * 108, 3.0f * 108), Quaternion.identity);
+		GameObject BlockSet1 = Instantiate(Block, new Vector2(7.5f * 108, 3.0f * 108), Quaternion.identity);
 		BlockSet1.transform.SetParent(BlockCanvas.transform, false);
 		BlockSet1.GetComponent<Image>().color = new Color(1, 1, 1);
-		GameObject BlockSet2 = Instantiate(Block, new Vector2(4.0f * 108, 2.0f * 108), Quaternion.identity);
+		GameObject BlockSet2 = Instantiate(Block, new Vector2(7.5f * 108, 2.0f * 108), Quaternion.identity);
 		BlockSet2.transform.SetParent(BlockCanvas.transform, false);
 		BlockSet2.GetComponent<Image>().color = new Color(1, 1, 1);
 	}
