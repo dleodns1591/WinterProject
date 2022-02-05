@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//치트, UI, 랭킹, 게임오버
 public class GameManager : MonoBehaviour
 {
     public static GameManager Inst { get; private set; }
     void Awake() => Inst = this;
 
-    [SerializeField] TurnSetting turnSetting;
+    [SerializeField] Notification_Panel notification_Panel;
 
     void Start()
     {
@@ -18,21 +17,18 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 #if UNITY_EDITOR
-        Input_CheatKey();
+        CheatKey();
 #endif
     }
 
-    void Input_CheatKey()
+    private void CheatKey()
     {
-        if(Input.GetKeyDown(KeyCode.Keypad1))
+        if (Input.GetKeyDown(KeyCode.Keypad1)) // 1번 키를 누르면 내 카드가 나온다.
         {
             TurnManager.OnAddCard?.Invoke(true);
         }
-        //if (Input.GetKeyDown(KeyCode.Keypad2))
-        //{
-        //    TurnManager.OnAddCard?.Invoke(false);
-        //}
-        if (Input.GetKeyDown(KeyCode.Keypad3))
+
+        if (Input.GetKeyDown(KeyCode.Keypad3)) // 3번 키를 누르면 EndTurn을 호출하도록 한다.
         {
             TurnManager.Inst.EndTurn();
         }
@@ -40,11 +36,11 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        StartCoroutine(TurnManager.Inst.StartGameCo());
+        StartCoroutine(TurnManager.Inst.Start_GameCo()); // TurnManager에 있는 Start_GameCo를 실행한다.
     }
 
-    public void MyTurn_TMP(string message) 
+    public void Notification(string message)
     {
-        turnSetting.Show(message);
+        notification_Panel.Show(message);
     }
 }
