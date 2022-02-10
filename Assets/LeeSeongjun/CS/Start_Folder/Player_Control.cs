@@ -10,6 +10,20 @@ public class Player_Control : MonoBehaviour
     {
         Player_HP = 100;
         Player_Money = 0;
-        DontDestroyOnLoad(gameObject);
+    }
+    private void Awake() 
+    { 
+        var obj = FindObjectsOfType<Player_Control>(); 
+        if (obj.Length == 1)
+        {
+            DontDestroyOnLoad(gameObject);
+            Debug.Log("삐빅! 통합 관리 생성");
+        }
+        else 
+        {
+            Destroy(gameObject);
+            Debug.Log("삐빅! 통합 관리 중복으로 추가 생성 취소");
+
+        } 
     }
 }
