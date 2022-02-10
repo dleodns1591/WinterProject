@@ -4,187 +4,195 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-
 public class Card_Manager : MonoBehaviour
 {
-    // 싱글톤으로 만들어 준다. 왜냐? Manager는 하나이기 때문이다.
+    // 싱글톤으로 만들어 준다. 이유는 Manager는 하나만 존재하기 때문이다.
     public static Card_Manager Inst { get; private set; }
     void Awake() => Inst = this;
 
-    [SerializeField] Item_So item_So; // Item_So 스크립트를 가져오기 위하여 private로 선언한다.  
-    [SerializeField] GameObject Card_Prefab; // 카드를 프리팹으로 만들어 놓은것을 참조하기 위해 써준다.
-    [SerializeField] List<Card> My_Card; // 나의 카드를 관리하기 위하여 List로 만들어준다.
-    [SerializeField] Transform Card_SpawnPoint; // 카드의 포지션을 정해준다.
-    [SerializeField] Transform Card_End_SpawnPoint; // 카드를 버릴 포지션을 정해준다.
-    [SerializeField] Transform MyCard_Left; //나의 카드 포지션 왼쪽
-    [SerializeField] Transform MyCard_Right; // 나의 카드 포지션 오른쪽
+    [SerializeField] Item_So item_So; // Item_So를 가져오기 위하여 private로 선언을 한다.
+    [SerializeField] GameObject Card_Prefab; // Card 프리팹을 참조하기 위하여 써준다.
+    // 플레이어가 생성하는 카드와 적이 생성하는 카드를 관리 해주기 위하여 리스트로 My_Card, Enemey_Card를 만들어준다.
+    [SerializeField] List<Card> My_Card;
+    [SerializeField] List<Card> Enemy_Card;
+    [SerializeField] Transform Card_SpawnPoint; // 카드의 생성 위치
+    [SerializeField] Transform My_CardLeft;
+    [SerializeField] Transform My_CardRight;
+    [SerializeField] Transform Enemy_CardLeft;
+    [SerializeField] Transform Enemy_CardRight;
     [SerializeField] ECard_State eCard_State;
 
-    List<Item> itemBuffer;
-    Card select_Card; // 선택된 카드를 담는 것
-    bool isMyCard_Drag;
-    bool onMyCard_Area;
-    enum ECard_State { Nothing, CanMouse_Over, CanMouse_Drag } //{ 마우스도 올릴 수 없다. / 마우스만 올릴 수 있다. / 마우스로 드래그 가능하다. }
+    List<Item> Item_Buffer;
+    // 선택된 카드를 담는다.
+    Card Select_Card;
+    bool isMy_CardDrag;
+    bool On_MyCardArea;
+    // Nothing = 마우스도 올릴 수 없다. Can_MouseOver = 마우스만 올릴 수 있다. Can_MouseDrag = 마우스로 드래그 까지 가능하다.
+    enum ECard_State { Nothing, Can_MouseOver, Can_MouseDrag }
 
     void Start()
     {
-        Setup_ItemBuffer();
-        TurnManager.OnAddCard += AddCard; // 추가
-        TurnManager.OffAddCard += ADDCARD; 
+        SetUp_ItemBuffer();
+        Turn_Manager.OnAdd_Card += Add_Card;
     }
 
     void Update()
     {
-        if (isMyCard_Drag) // 만약 isMyCard_Drag가 true라면 Card_Drage함수를 호출한다.
-        {
+        if(isMy_CardDrag)
+        { 
+            // isMy_CardDrag가 true라면 Card_Drag 함수를 호출한다.
             Card_Drag();
         }
 
         Detect_CardArea();
-        Set_ECard_State();
+        Set_ECardState();
     }
 
-    private void OnDestroy()
+    void OnDestroy()
     {
-        TurnManager.OnAddCard -= AddCard; // 제거
+        Turn_Manager.OnAdd_Card -= Add_Card;
     }
 
-    private void Setup_ItemBuffer()
+    private void SetUp_ItemBuffer()
     {
-        itemBuffer = new List<Item>(100); // 새로운 List 껍데기를 만들어준다.
-        for (int i = 0; i < item_So.items.Length; i++) // Item_So스크립트에 현재 8개가 담겨져 있는 배열이 items 이다.
+        Item_Buffer = new List<Item>(8);
+        for (int i = 0; i < item_So.items.Length; i++)
         {
             Item item = item_So.items[i];
-            itemBuffer.Add(item);
+            Item_Buffer.Add(item);
+
         }
 
-        for (int i = 0; i < itemBuffer.Count; i++) // 중복 된 카드가 여러장이 나오면 안되므로 랜덤을 돌려준다.
+        // 카드가 나올 때 똑같이 나오는 순서를 방지한다.
+        for (int i = 0; i < Item_Buffer.Count; i++)
         {
-            int rand = Random.Range(i, itemBuffer.Count); // 인덱스가 증가함에 따라
-            Item temp = itemBuffer[i]; // 그 인덱스를 마음대로 선택을 하고
-            itemBuffer[i] = itemBuffer[rand]; // 대입을 하면 순서가 바뀐다.
-            itemBuffer[rand] = temp;
+            int Rand = Random.Range(i, Item_Buffer.Count);
+            Item Temp = Item_Buffer[i];
+            Item_Buffer[i] = Item_Buffer[Rand];
+            Item_Buffer[Rand] = Temp;
         }
     }
 
-    // 최대 카드가 8개라면, 8개의 카드가 모두 소진됬을 시 다시 Setup해서 Buffer에다가 채워넣습니다.
-    public Item PopItem() // 플레이어가 카드를 뽑을 때마다, 
+    public Item PopItem()
     {
-        if (itemBuffer.Count == 0)
+        // 우리 또는 적이 카드를 뽑을 때 마다 맨 앞에 있는 index를 뽑아서 return item을 한다.
+        // 이제 카드를 다 뽑고 더 이상 뽑을것이 없다면, SetUp_ItemBuffer을 호출시켜 다시 카드를 채워 넣는다.
+        if (Item_Buffer.Count == 0)
         {
-            Setup_ItemBuffer();
+            SetUp_ItemBuffer();
         }
 
-        Item item = itemBuffer[0]; // 맨 앞에 있는 인덱스를 뽑아서
-        itemBuffer.RemoveAt(0); // RemoveAt(0)을 해서
-        return item; // return item 으로 뽑아낸다.
+        Item item = Item_Buffer[0];
+        Item_Buffer.RemoveAt(0);
+        return item;
     }
 
-    private void AddCard(bool isMine)
+    private void Add_Card(bool isMine)
     {
-        var Card_Object = Instantiate(Card_Prefab, Card_SpawnPoint.position, Utile.QI); // 카드 프리팹을 Instantiate를 했다.
-        var Card = Card_Object.GetComponent<Card>(); // Card_Object가 오브젝트 형식이라서 GetComponent로 카드까지 가져온다.
-        Card.Setup(PopItem(), isMine); // Card에 Setup을 하면 PopItem이 호출이 된다. 그러면 ItemBuffer에 있는 카드중 한 개를 뽑는다.
-
-        if (isMine == true)
-        {
-            My_Card.Add(Card); // isMine이 true라면 My_Card에 Add를 한다. 그래서 생성된 카드에 대입을 한다.
-        }
+        // 카드에 스탯을 넣기 때문에 SetUp에 PopItem을 호출한다. 그리고 isMine으로 자기자신인지 전달을 해준다. 
+        var Card_Object = Instantiate(Card_Prefab, Card_SpawnPoint.position, Utill.QI);
+        var Card = Card_Object.GetComponent<Card>();
+        Card.SetUp(PopItem(), isMine);
+        (isMine ? My_Card : Enemy_Card).Add(Card);
 
         Set_OriginOrder(isMine);
-        Card_Ailgnment(isMine);
+        Card_Alignment(isMine);
     }
 
-    private void ADDCARD(bool isMine)
+    private void Set_OriginOrder(bool isMine)
     {
-        var Card_Object = Instantiate(Card_Prefab, Card_End_SpawnPoint.position, Utile.QI); // 카드 프리팹을 Instantiate를 했다.
-    }
-
-    private void Set_OriginOrder(bool isMine) // Order을 정렬하는 함수
-    {
-        if (isMine == true)
+        // 이 함수는 order을 정렬해 주기 위한 함수
+        int Count = isMine ? My_Card.Count : Enemy_Card.Count;
+        for (int i = 0; i < Count; i++)
         {
-            int count = My_Card.Count;
-
-            for (int i = 0; i < count; i++)
-            {
-                var Target_Card = My_Card[i];
-                Target_Card?.GetComponent<Order>().Set_OriginOrder(i);
-            }
+            var Target_Card = isMine ? My_Card[i] : Enemy_Card[i];
+            Target_Card?.GetComponent<Order>().Set_OriginOrder(i);
         }
     }
 
-    private void Card_Ailgnment(bool isMine) //카드 정렬하는 함수
+    private void Card_Alignment(bool isMine)
     {
-        List<PRS> originCard_PRS = new List<PRS>();
+        List<PRS> Origin_CardPRS = new List<PRS>();
         if (isMine)
         {
-            originCard_PRS = RoundAlignment(MyCard_Left, MyCard_Right, My_Card.Count, 0.5f, Vector3.one * 1f);
+            Origin_CardPRS = Round_Alignment(My_CardLeft, My_CardRight, My_Card.Count, 0.5f, Vector3.one * 0.8f);
+        }
+        else
+        {
+            Origin_CardPRS = Round_Alignment(Enemy_CardLeft, Enemy_CardRight, Enemy_Card.Count, -0.5f, Vector3.one * 0.8f);
         }
 
-        if (isMine == true)
-        {
-            var Target_Card = My_Card; // My_Card 를 정렬한다.
-            for (int i = 0; i < Target_Card.Count; i++)
-            {
-                var target_Card = Target_Card[i]; // Target_Card[i] 를 target_Card 라고 만든다.
 
-                target_Card.originPRS = originCard_PRS[i]; // originPRS 에 기본값을 넣어준다.
-                target_Card.Move_Transform(target_Card.originPRS, true, 0.7f); // target_Card에 Move_Transform을 통해서 orginPRS 넘져주고, Dotween 을 사용할거지 확인여부 true, Dotween_Time = 0.7f 이다.          
-            }
+        // isMine이 true라면 My_Card를 정렬하는거고, false라면 Enemy_Card를 정렬한다.
+        var Target_Card = isMine ? My_Card : Enemy_Card;
+        for (int i = 0; i < Target_Card.Count; i++)
+        {
+            var target_Card = Target_Card[i];
+            target_Card.Origin_PRS = Origin_CardPRS[i];
+            target_Card.Move_Transform(target_Card.Origin_PRS, true, 0.7f);
         }
     }
 
-    List<PRS> RoundAlignment(Transform Left_Tr, Transform Right_Tr, int Obj_Count, float Height, Vector3 Scale)
+    List<PRS> Round_Alignment(Transform Left_Tr, Transform Right_Tr, int Obj_Count, float Height, Vector3 Scale)
     {
-        float[] objLerps = new float[Obj_Count]; // float 배열 objLerps를 만든다.
-        List<PRS> results = new List<PRS>(Obj_Count); // List results를 만들어 마지막에 results를 반환한다.
+        float[] Obj_Lerps = new float[Obj_Count];
+        List<PRS> Results = new List<PRS>(Obj_Count);
 
+        // 카드의 간격
         switch (Obj_Count)
-        { //고정값
+        {
+            // 카드가 한 장 일때는 중앙, 두,세 장일 때는 어느정도 카드와 카드 사이가 띄어져 있다.
             case 1:
-                objLerps = new float[] { 0.5f }; break; // 카드가 한 장 일때는 중앙
+                Obj_Lerps = new float[] { 0.5f }; break;
             case 2:
-                objLerps = new float[] { 0.27f, 0.73f }; break; // 카드가 두 장 일때는 어느정도 떨어져 있음
+                Obj_Lerps = new float[] { 0.27f, 0.73f }; break;
             case 3:
-                objLerps = new float[] { 0.1f, 0.5f, 0.9f }; break; // 마찬가지로 카드가 세 장 일때는 어느정도 떨어트려 놓는다.
-            default: // 카드가 여러장일 경우
-                float interval = 1f / (Obj_Count - 1);
-                for (int i = 0; i < Obj_Count; i++)
+                Obj_Lerps = new float[] { 0.1f, 0.5f, 0.9f }; break;
+            default:
+                float Interval = 1f / (Obj_Count - 1);
+                for(int i = 0; i< Obj_Count; i++)
                 {
-                    objLerps[i] = interval * i;
+                    Obj_Lerps[i] = Interval * i;
                 }
                 break;
         }
 
-        //원의 방정식
+        // 원의 방정식
         for (int i = 0; i < Obj_Count; i++)
         {
-            var Target_Pos = Vector3.Lerp(Left_Tr.position, Right_Tr.position, objLerps[i]); // 각 각의 Target_Pos는 objLerps가 0 ~ 1 사이의 범위의 값을 가지므로, Left_Tr의 포지션과 Right_Tr의 포지션에 Lerp를 해가지고 어떤 위치에 존재하는지 알려준다. [ex) 0 = Left_Tr , 0.5 = 중간값 , 1 = Right_Tr  ]
-            var Target_Rot = Utile.QI;
-            if (Obj_Count >= 4) // 카드가 4장이상일 경우 회전을 해야한다.
+            // Obj_Lerps는 0 에서 1 사의 값을 가지므로 [ 0이면 Left_Tr, 0.5이면 둘의 중간값, 1이면 Right_Tr 값이 나온다. ]
+            var Target_Pos = Vector3.Lerp(Left_Tr.position, Right_Tr.position, Obj_Lerps[i]);
+            var Target_Rot = Utill.QI;
+
+            // 카드의 갯수가 4장 이상일 때 회전을 해야한다.
+            if(Obj_Count >= 4)
             {
-                float curve = Mathf.Sqrt(Mathf.Pow(Height, 2) - Mathf.Pow(objLerps[i] - 0.5f, 2)); // Height에 뭘 하든 제곱을 하기 때문에 curve는 양수이다.
-                curve = Height >= 0 ? curve : -curve;
-                Target_Pos.y += curve;
-                Target_Rot = Quaternion.Slerp(Left_Tr.rotation, Right_Tr.rotation, objLerps[i]);
+                float Curve = Mathf.Sqrt(Mathf.Pow(Height, 2) - Mathf.Pow(Obj_Lerps[i] - 0.5f, 2));
+                Curve = Height >= 0 ? Curve : -Curve;
+                Target_Pos.y += Curve;
+                Target_Rot = Quaternion.Slerp(Left_Tr.rotation, Right_Tr.rotation, Obj_Lerps[i]);
             }
-            results.Add(new PRS(Target_Pos, Target_Rot, Scale)); // 카드가 4장 이상 작을 경우 위에 계산을 하지 않고 바로 추가한다. 이유는 카드가 3장 부터는 회전이 필요하지 않기 때문이다.
+            // 만약 카드의 갯수가 4장보다 작은 숫자일 경우 위에 계산을 하지 않고 바로 추가한다.
+            Results.Add(new PRS(Target_Pos, Target_Rot, Scale));
+            
         }
-        return results;
+        return Results;
+
     }
 
-    #region MyCard
+    // 모든 카드의 마우스로 올리고 내리고 정보를 Card_Manger에게 전달해준다.
+    #region My_Card
 
-    // Card_MouseOver 와 Card_MouseExit 둘 다 매개변수로 Card를 받는다.
     public void Card_MouseOver(Card card)
     {
-        if(eCard_State == ECard_State.Nothing) // 로딩중에는 카드를 만질 수 없으므로 Nothing을 해준다.
+        // 로딩중일 때는 Nothing으로 해둔다.
+        if(eCard_State == ECard_State.Nothing)
         {
             return;
-        }    
+        }
 
-        select_Card = card;
+        // 마우스를 올려놓은 카드가 Select_Card가 된다.
+        Select_Card = card;
         Enlarge_Card(true, card);
     }
 
@@ -193,71 +201,95 @@ public class Card_Manager : MonoBehaviour
         Enlarge_Card(false, card);
     }
 
-    public void Card_MouseDown() // 카드를 누르는 순간 이 함수가 호출 된다.
+    public void Card_MouseDown()
     {
-        if (eCard_State != ECard_State.CanMouse_Drag)
+        // Can_MousseDrag가 아니면은 return을 해준다.
+        if(eCard_State != ECard_State.Can_MouseDrag)
         {
             return;
         }
 
-        isMyCard_Drag = true; // isMyCard_Drag를 true로 한다,
+        // 마우스를 누르고 있을 떄 
+        isMy_CardDrag = true;
     }
 
-    public void Card_MouseUp() // 카드를 때는 순간 이 함수가 호출 된다.
+    public void Card_MouseUp()
     {
-        isMyCard_Drag = false; // isMyCard_Drag를 false로 한다.
+        // 마우스를 때고 있을 때
+        isMy_CardDrag = false;
 
-        if(eCard_State != ECard_State.CanMouse_Drag)
+        // Can_MouseDrag가 false라면 return을 해준다.
+        if(eCard_State != ECard_State.Can_MouseDrag)
+        {
+            return; 
+        }
+
+        if(On_MyCardArea)
+        {
+            Entity_Manager.Inst.Remove_MyEmpty_Entity();
+        }
+    }
+
+    private void Card_Drag()
+    {
+        if(eCard_State != ECard_State.Can_MouseDrag)
         {
             return;
         }
-    }
 
-    private void Card_Drag() // 카드를 드래그 중일 때 실행한다.
-    {
-        if (!onMyCard_Area) // onMyCard_Area가 false라면 드래그를 해서 필드에 카드가 가있다면 실행한다.
+        // 카드 드래그 하고 있을 때 
+        if(!On_MyCardArea)
         {
-            select_Card.Move_Transform(new PRS(Utile.MousePos, Utile.QI, select_Card.originPRS.Scale), false);
+            // On_MyCardArea가 false라면 실행한다.
+            // 드래그를 해서 필드에 카드가 가있다면 그 위치를 옮겨준다.
+            Select_Card.Move_Transform(new PRS(Utill.Mouse_Pos, Utill.QI, Select_Card.Origin_PRS.Scale), false);
+            Entity_Manager.Inst.Insert_MyEmptyEntity(Utill.Mouse_Pos.x);
         }
-
-        
     }
 
     private void Detect_CardArea()
     {
-        RaycastHit2D[] hits = Physics2D.RaycastAll(Utile.MousePos, Vector3.forward); // Physics2D.RaycastAll을 써서 마우스와 충돌한 모든 RaycastHit를 가져온다.
-        int layer = LayerMask.NameToLayer("MyCardArea");
-        onMyCard_Area = Array.Exists(hits, x => x.collider.gameObject.layer == layer);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(Utill.Mouse_Pos, Vector3.forward);
+        // Layer에 만든 MyCardArea Layer를 넣어준다.
+        int Layer = LayerMask.NameToLayer("MyCardArea");
+        On_MyCardArea = Array.Exists(hits, x => x.collider.gameObject.layer == Layer);
     }
 
-    private void Enlarge_Card(bool isEnlarge, Card card) // 마우스를 가져다 놓았을 때 카드가 확대되는 함수, isEnlarge 가 true라면 확대 false라면 축소 이다.
+    private void Enlarge_Card(bool isEnlarge, Card card)
     {
-        if (isEnlarge)
+        // 마우스를 카드위에 올려놓았을때 확대되는 함수
+        // isEnlarge가 true라면 확대이고, false라면 축소이다.    
+        if(isEnlarge)
         {
-            Vector3 enlarge_Pos = new Vector3(card.originPRS.pos.x, -1.5f, -10f);
-            card.Move_Transform(new PRS(enlarge_Pos, Utile.QI, Vector3.one * 1.2f), false);
+            Vector3 Enlarge_Pos = new Vector3(card.Origin_PRS.Pos.x, -2f, -10f);
+            card.Move_Transform(new PRS(Enlarge_Pos, Utill.QI, Vector3.one * 1f), false);
         }
         else
         {
-            card.Move_Transform(card.originPRS, false);
+            card.Move_Transform(card.Origin_PRS, false);
         }
 
         card.GetComponent<Order>().Set_MostFrontOrder(isEnlarge);
     }
 
-    private void Set_ECard_State()
+    private void Set_ECardState()
     {
-        if (TurnManager.Inst.isLoading) // isLoading이 true일 때는 Nothing으로 해놓은다.
+        if(Turn_Manager.Inst.isLoading)
         {
+            // 게임이 시작되지도 않았을 때, 즉 isLoading이 true일 동안에는 Nothing으로 해둔다.
             eCard_State = ECard_State.Nothing;
         }
-        else if (!TurnManager.Inst.MyTurn) // 내 턴이 아닐경우 CanMouse_Over 마우스만 올려놓을 수 있다.
+
+        else if(!Turn_Manager.Inst.My_Turn)
         {
-            eCard_State = ECard_State.CanMouse_Over;
+            // 내 턴이 아니라면 마우스만 올릴 수 있다.
+            eCard_State = ECard_State.Can_MouseOver;
         }
-        else if(TurnManager.Inst.MyTurn) // 내 턴일 경우 CanMouse_Drag 마우스로 드래그를 할 수 있다.
+
+        else if(Turn_Manager.Inst.My_Turn)
         {
-            eCard_State = ECard_State.CanMouse_Drag;
+            // 내 턴일 동안에는 카드를 드래그 할 수 있다.
+            eCard_State = ECard_State.Can_MouseDrag;
         }
     }
 

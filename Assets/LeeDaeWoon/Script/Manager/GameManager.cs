@@ -2,45 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 치트, UI, 랭킹, 게임오버 등 전반적인 게임관련 된 기능을 이 스크립트에서 관리한다.
 public class GameManager : MonoBehaviour
 {
     public static GameManager Inst { get; private set; }
     void Awake() => Inst = this;
 
-    [SerializeField] Notification_Panel notification_Panel;
+    [SerializeField] Notification Notification_Image;
 
     void Start()
     {
-        StartGame();
+        Start_Game();
     }
 
     void Update()
     {
 #if UNITY_EDITOR
-        CheatKey();
+        Cheat_Key();
 #endif
     }
 
-    private void CheatKey()
+    private void Cheat_Key()
     {
-        if (Input.GetKeyDown(KeyCode.Keypad1)) // 1번 키를 누르면 내 카드가 나온다.
+        if(Input.GetKeyDown(KeyCode.Keypad1))
         {
-            TurnManager.OnAddCard?.Invoke(true);
+            Turn_Manager.OnAdd_Card?.Invoke(true);
         }
-
-        if (Input.GetKeyDown(KeyCode.Keypad3)) // 3번 키를 누르면 EndTurn을 호출하도록 한다.
+        if (Input.GetKeyDown(KeyCode.Keypad2))
         {
-            TurnManager.Inst.EndTurn();
+            Turn_Manager.OnAdd_Card?.Invoke(false);
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            Turn_Manager.Inst.End_Turn();
         }
     }
 
-    public void StartGame()
+    private void Start_Game()
     {
-        StartCoroutine(TurnManager.Inst.Start_GameCo()); // TurnManager에 있는 Start_GameCo를 실행한다.
+        // Turn_Manager에 있는 Start_GameCo를 실행시킨다.
+        StartCoroutine(Turn_Manager.Inst.Start_GameCo());
     }
 
-    public void Notification(string message)
+    public void Notification(string Message)
     {
-        notification_Panel.Show(message);
+        Notification_Image.Show(Message);
     }
 }
