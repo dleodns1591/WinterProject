@@ -31,6 +31,7 @@ public class Turn_Manager : MonoBehaviour
     WaitForSeconds delay_07 = new WaitForSeconds(0.7f);
 
     public static Action<bool> OnAdd_Card;
+    public static event Action<bool> OnTurn_Start;
 
     private void Game_Setup()
     {
@@ -82,6 +83,7 @@ public class Turn_Manager : MonoBehaviour
         OnAdd_Card?.Invoke(My_Turn); // 내 턴이라면 카드르 한 장 추가해주고, 상대 턴이라면 상대한테 카드를 한 장 추가해준다.   
         yield return delay_07; // 0.7초 대기
         isLoading = false; // isLoading을 false로 해주면 카드를 클릭할 수 있는 상태로 된다.
+        OnTurn_Start?.Invoke(My_Turn);
     }
 
     public void End_Turn()

@@ -36,6 +36,10 @@ public class GameManager : MonoBehaviour
         {
             Turn_Manager.Inst.End_Turn();
         }
+        if (Input.GetKeyDown(KeyCode.Keypad4))
+        {
+            Card_Manager.Inst.TryPut_Card(false);
+        }
     }
 
     private void Start_Game()

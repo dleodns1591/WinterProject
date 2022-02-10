@@ -14,7 +14,7 @@ public class Entity_Manager : MonoBehaviour
     [SerializeField] Entity PlayerBoss_Entity;
     [SerializeField] Entity EnemyBoss_Entity;
 
-    const int MaxEntity_Count = 6;
+    const int MaxEntity_Count = 4;
     // IsFull_MyEntity는 Entity가 꽉 찼는지 알려준다.
     // My_Entity.Count가 MaxEntity_Count 이상이고 또한 Exist_MyEmpty_Entity가 존재하지 않을 경우
     public bool IsFull_MyEntity => My_Entity.Count >= MaxEntity_Count && !Exist_MyEmpty_Entity;
@@ -24,14 +24,38 @@ public class Entity_Manager : MonoBehaviour
     bool Exist_MyEmpty_Entity => My_Entity.Exists(x => x == MyEmpty_Entity);
     int MyEmptyEntity_Index => My_Entity.FindIndex(x => x == MyEmpty_Entity);
 
+    WaitForSeconds delay_1 = new WaitForSeconds(1);
+
     void Start()
     {
-        
+        Turn_Manager.OnTurn_Start += OnTurn_Start;
     }
 
     void Update()
     {
         
+    }
+
+    void OnDestroy()
+    {
+        Turn_Manager.OnTurn_Start -= OnTurn_Start;
+    }
+
+    private void OnTurn_Start(bool My_Turn)
+    {
+        if(!My_Turn)
+        {
+            StartCoroutine(AI_Co());
+        }
+    }
+
+    IEnumerator AI_Co()
+    {
+        Card_Manager.Inst.TryPut_Card(false);
+        yield return delay_1;
+
+        // 공격로직
+        Turn_Manager.Inst.End_Turn();
     }
 
     private void Entity_Alignment(bool isMine)
@@ -46,12 +70,12 @@ public class Entity_Manager : MonoBehaviour
         {
             // Target_X는 가로로 정렬해준다.
             // Target_Entity.Count가 1개라면 X좌표는 0이 된다. 즉 중앙이다.
-            float Target_X = (Target_Entity.Count - 1) * -3.4f + i * 6.8f;
+            float Target_X = (Target_Entity.Count - 1) * -1.5f + i * 3f;
 
             var target_Entity = Target_Entity[i];
             target_Entity.Origin_Pos = new Vector3(Target_X, Target_Y, 0);
             target_Entity.Move_Transform(target_Entity.Origin_Pos, true, 0.5f);
-            target_Entity.GetComponent<Order>().Set_OriginOrder(i);
+            target_Entity.GetComponent<Order>()?.Set_OriginOrder(i);
         }
     }
 
@@ -97,5 +121,44 @@ public class Entity_Manager : MonoBehaviour
         // 정렬이 될 수 있도록 Entity_Alignment를 true로 해준다.
         My_Entity.RemoveAt(MyEmptyEntity_Index);
         Entity_Alignment(true);
+    }
+
+    public bool Spawn_Entity(bool isMine, Item item, Vector3 Spawn_Pos)
+    {
+        // bool을 반환한 이유는 엔티티가 스폰을 성공을 했는지 못했는지 알고 싶기 때문이다.
+        if(isMine)
+        {
+            // 만약 isMine일 경우 내 엔티티가 꽉 차있거나, 내 Empty_Entity가 없을 경우 return false를 해준다.
+            if(IsFull_MyEntity || !Exist_MyEmpty_Entity)
+            {
+                return false;
+            }
+        }
+        else
+        {
+            // 만약 isMine이 false일 때 적의 엔티티가 꽉 차있을 경우 return false를 해준다.
+            if(IsFull_EnmeyEntity)
+            {
+                return false;
+            }
+        }
+
+        var Entity_Object = Instantiate(Entity_Prefab, Spawn_Pos, Utill.QI);
+        var Entity = Entity_Object.GetComponent<Entity>();
+
+        if(isMine)
+        {
+            My_Entity[MyEmptyEntity_Index] = Entity;
+        }
+        else
+        {
+            Enemy_Entity.Insert(Random.Range(0, Enemy_Entity.Count), Entity);
+        }
+
+        Entity.isMine = isMine;
+        Entity.Set_Up(item);
+        Entity_Alignment(isMine);
+
+        return true;
     }
 }
