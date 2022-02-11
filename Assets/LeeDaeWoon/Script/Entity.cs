@@ -20,6 +20,10 @@ public class Entity : MonoBehaviour
     // isBoss_Empty는 Boss 와 Empty 오브젝트에 넣어준다.
     public bool isMine;
     public bool isBoss_Empty;
+    // 대상을 때릴 수 있는 상태인지 확인해준다.
+    public bool Attack_Able;
+    // 죽음을 판단한다.
+    public bool isDie;
     // 정렬을 위해 Origin_Pos를 만들어준다.
     public Vector3 Origin_Pos;
 
@@ -57,5 +61,49 @@ public class Entity : MonoBehaviour
         {
             transform.position = Pos;
         }
+    }
+
+    private void OnMouseDown()
+    {
+        // 마우스를 누르고 있을 때 Entity_Manger에 있는 Entity_MouseDown 함수를 호출시킨다.
+        if(isMine)
+        {
+            Entity_Manager.Inst.Entity_MouseDown(this);
+        }
+    }
+
+    private void OnMouseUp()
+    {        
+        // 마우스를 때고 있을 때 Entity_Manger에 있는 Entity_MouseUp 함수를 호출시킨다.
+        if (isMine)
+        {
+            Entity_Manager.Inst.Entity_MouseUp();
+        }
+    }
+
+    private void OnMouseDrag()
+    {
+        // 마우스로 드래그를 하고 있을 때 Entity_Manger에 있는 Entity_MouseDrag 함수를 호출시킨다.
+        if (isMine)
+        {
+            Entity_Manager.Inst.Entity_MouseDrag();
+        }
+    }
+
+    public bool Damage(int Damage)
+    {
+        // 체력을 데미지 만큼 깎는다.
+        // 체력 텍스트에도 표시한다.
+        Health -= Damage;
+        Health_TMP.text = Health.ToString();
+
+        // 만약 체력이 0보다 작거나 같다면, isDie를 true로 하여 죽어다고 표시한다.
+        // return같은 경우에는 죽었다면 true, 안죽었다면 false 해준다.
+        if(Health <= 0)
+        {
+            isDie = true;
+            return true;
+        }
+        return false;
     }
 }

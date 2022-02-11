@@ -8,7 +8,14 @@ public class GameManager : MonoBehaviour
     public static GameManager Inst { get; private set; }
     void Awake() => Inst = this;
 
+    [Multiline(10)]
+    [SerializeField] string Cheat_Info;
     [SerializeField] Notification Notification_Image;
+    [SerializeField] Result Result_Image;
+    [SerializeField] Result Result_Image_Lose;
+    [SerializeField] GameObject EndTurn_Btn;
+
+    WaitForSeconds delay_2 = new WaitForSeconds(2);
 
     void Start()
     {
@@ -40,6 +47,14 @@ public class GameManager : MonoBehaviour
         {
             Card_Manager.Inst.TryPut_Card(false);
         }
+        if (Input.GetKeyDown(KeyCode.Keypad5))
+        {
+            Entity_Manager.Inst.Damage_Boss(true, 99);
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad6))
+        {
+            Entity_Manager.Inst.Damage_Boss(false, 99);
+        }
     }
 
     private void Start_Game()
@@ -51,5 +66,22 @@ public class GameManager : MonoBehaviour
     public void Notification(string Message)
     {
         Notification_Image.Show(Message);
+    }
+
+    public IEnumerator GameOver(bool isMyWin)
+    {
+        Turn_Manager.Inst.isLoading = true;
+        EndTurn_Btn.SetActive(false);
+        yield return delay_2;
+
+        Turn_Manager.Inst.isLoading = true;
+        if (isMyWin)
+        {
+            Result_Image.Show();
+        }
+        else
+        {
+            Result_Image_Lose.Show();
+        }
     }
 }
