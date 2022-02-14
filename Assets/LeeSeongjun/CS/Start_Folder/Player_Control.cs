@@ -8,7 +8,8 @@ public class Player_Control : MonoBehaviour
     public int Player_Money = 0;
     void Start()
     {
-        Player_HP = 100;
+        //Player_HP = 100;
+        Player_HP = 5;
         Player_Money = 0;
     }
     private void Awake() 
@@ -24,6 +25,6 @@ public class Player_Control : MonoBehaviour
             Destroy(gameObject);
             Debug.Log("삐빅! 통합 관리 중복으로 추가 생성 취소");
 
-        } 
+        }
     }
 }
