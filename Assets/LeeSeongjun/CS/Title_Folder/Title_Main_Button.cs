@@ -10,7 +10,7 @@ public class Title_Main_Button : MonoBehaviour
     }
     void SceneMove()
     {
-        SceneManager.LoadScene("Main_Scene");
+        SceneManager.LoadScene("Test_Ingame");
         Debug.Log("타이틀화면에서 메인화면으로 이동");
     }
 }
