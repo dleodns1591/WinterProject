@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 40459519}
   - component: {fileID: 40459520}
   - component: {fileID: 40459521}
+  - component: {fileID: 40459522}
   m_Layer: 5
   m_Name: "\uBC14\uAE65 \uD45C\uC9C0 \uAE30\uBCF8x\uC88C\uD45C -540 , -1380"
   m_TagString: Untagged
@@ -330,6 +331,20 @@ MonoBehaviour:
   Three_Heart_0: {fileID: 624049214}
   Four_Heart_0: {fileID: 1874078382}
   Five_Heart_0: {fileID: 1609894393}
+--- !u!114 &40459522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40459515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0786659efa0a32341a88c1d075cb6312, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightArrow: {fileID: 705817993}
+  leftArrow: {fileID: 1817387708}
 --- !u!1 &58368054
 GameObject:
   m_ObjectHideFlags: 0
