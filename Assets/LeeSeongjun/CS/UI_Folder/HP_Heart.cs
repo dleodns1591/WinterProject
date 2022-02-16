@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HP_Heart : MonoBehaviour
 {
@@ -16,13 +17,16 @@ public class HP_Heart : MonoBehaviour
     public GameObject Four_Heart_0;
     public GameObject Five_Heart_0;
 
+    public GameObject UI_Object;
     void Update()
     {
         Player_Control oc = GameObject.Find("ÅëÇÕ°ü¸®").GetComponent<Player_Control>();
         switch (oc.Player_HP)
         {
             case 0:
-                Debug.Log("»ßºò! °ÔÀÓ ¿À¹ö »ß¸´»ß¸´");
+                SceneManager.LoadScene("Dead_Scene"); 
+                Destroy(UI_Object);
+
                 break;
 
             case 1:
