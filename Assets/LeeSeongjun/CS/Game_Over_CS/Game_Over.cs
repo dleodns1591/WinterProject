@@ -21,7 +21,7 @@ public class Game_Over : MonoBehaviour
         fTickTime += Time.deltaTime;
         if (fTickTime >= fDestroyTime)
         {
-            color.a += 0.008f;
+            color.a += 0.005f;
             goImage.GetComponent<Image>().color = color;
         }
     }
