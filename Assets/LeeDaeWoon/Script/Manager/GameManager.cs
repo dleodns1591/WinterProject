@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 // 치트, UI, 랭킹, 게임오버 등 전반적인 게임관련 된 기능을 이 스크립트에서 관리한다.
 public class GameManager : MonoBehaviour
@@ -84,4 +85,5 @@ public class GameManager : MonoBehaviour
             Result_Image_Lose.Show();
         }
     }
+
 }

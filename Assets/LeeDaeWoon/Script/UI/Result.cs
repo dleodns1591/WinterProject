@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Result : MonoBehaviour
 {
     [SerializeField] TMP_Text Result_TMP;
+    public Image image;
 
     void Start() => Scale_Zero();
 
@@ -27,14 +29,9 @@ public class Result : MonoBehaviour
         SceneManager.LoadScene(4);
     }
 
-    public void Title()
-    {
-        SceneManager.LoadScene(1);
-    }
-
     public void Next()
     {
-        //SceneManager.LoadScene()
+        SceneManager.LoadScene(4);
     }
 
 }
