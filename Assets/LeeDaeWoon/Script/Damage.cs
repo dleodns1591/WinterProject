@@ -41,7 +41,7 @@ public class Damage : MonoBehaviour
 
         Sequence sequence = DOTween.Sequence()
             // 크기를 0.5초 동안 크기 1만큼 키운다.
-            .Append(transform.DOScale(Vector3.one * 1f, 0.5f).SetEase(Ease.InOutBack))
+            .Append(transform.DOScale(Vector3.one * 1.5f, 0.5f).SetEase(Ease.InOutBack))
             // 1.2초 동안 크기를 키운모습을 보여준다.
             .AppendInterval(1.2f)
             // 0.5초 동안 작아진다.

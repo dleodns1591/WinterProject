@@ -13,35 +13,103 @@ MonoBehaviour:
   m_Name: Item_So
   m_EditorClassIdentifier: 
   items:
-  - Name: "\uD0DC\uD3C9\uC591 \uC800 \uB118\uC5B4"
-    Attack: 15
-    Health: 8
-    sprite: {fileID: 21300000, guid: 7c7fe13a638908f4b8ac854fd2a5f45c, type: 3}
-  - Name: "\uBB3C\uAC70\uD488"
-    Attack: 7
-    Health: 15
-    sprite: {fileID: 21300000, guid: 3bc3cb49db05ceb4196ce3f93a7df309, type: 3}
-  - Name: "\uC783\uC5B4\uBC84\uB9B0 \uBAA9\uC18C\uB9AC"
+  - Name: "\uBC31\uC124\uACF5\uC8FC"
+    Attack: 5
+    Health: 7
+    sprite: {fileID: 21300000, guid: a22bb944bf1daa34ab24a494d730d249, type: 3}
+  - Name: "\uB9C8\uB140"
+    Attack: 4
+    Health: 5
+    sprite: {fileID: 21300000, guid: 5ce7d03e919f1e643baac1af1f6b4c28, type: 3}
+  - Name: "\uC0AC\uACFC"
+    Attack: 5
+    Health: 1
+    sprite: {fileID: 21300000, guid: 012f8330e6d112f4bb48e1d5adc18175, type: 3}
+  - Name: "\uAC70\uC6B8"
+    Attack: 3
+    Health: 4
+    sprite: {fileID: 21300000, guid: 7e86d9446512021458e327df6fc7eb39, type: 3}
+  - Name: "\uC0AC\uB0E5\uAFBC"
+    Attack: 1
+    Health: 6
+    sprite: {fileID: 21300000, guid: 10223bcb3f338e24fa5cd28a1d47c862, type: 3}
+  - Name: "\uBBF8\uB140"
+    Attack: 6
+    Health: 5
+    sprite: {fileID: 21300000, guid: be227217547590446a8c8438bbcded8d, type: 3}
+  - Name: "\uC57C\uC218"
+    Attack: 3
+    Health: 6
+    sprite: {fileID: 21300000, guid: 95f20a2cc8f2096418ec70e2ba2a097c, type: 3}
+  - Name: "\uD1A0\uD1A0"
+    Attack: 4
+    Health: 3
+    sprite: {fileID: 21300000, guid: 4e4707fa02156424787fc3a3e95c1f9b, type: 3}
+  - Name: "\uC2DC\uACC4"
+    Attack: 5
+    Health: 3
+    sprite: {fileID: 21300000, guid: 6529b261623de0d4d91250bf7d7d911d, type: 3}
+  - Name: "\uC54C\uCF5C\uB7A8\uD504"
+    Attack: 1
+    Health: 7
+    sprite: {fileID: 21300000, guid: 48d823bab3b9a8a43a1e85943a7aa9a9, type: 3}
+  - Name: "\uC778\uC5B4\uACF5\uC8FC"
     Attack: 8
-    Health: 13
-    sprite: {fileID: 21300000, guid: e92ae1aaddf28e348b9267aed6457859, type: 3}
-  - Name: "\uBB3C\uC18D\uC5D0\uC11C?"
-    Attack: 10
-    Health: 20
-    sprite: {fileID: 21300000, guid: 52dc89786635b894bb733cb82e42e652, type: 3}
-  - Name: "\uBB3C\uACE0\uAE30\uC640 \uB09A\uC2DC"
-    Attack: 14
-    Health: 25
-    sprite: {fileID: 21300000, guid: 4d430269d9d3e454cabb176230414d32, type: 3}
-  - Name: "\uBC14\uC704\uC5D0 \uAE01\uD614\uC5B4!"
-    Attack: 20
-    Health: 24
-    sprite: {fileID: 21300000, guid: ec4059a745c8d564f97788473d760aec, type: 3}
-  - Name: "\uBA38\uB9AC\uCE7C\uACFC \uB9DE\uBC14\uAFBC \uCE7C"
-    Attack: 18
-    Health: 26
-    sprite: {fileID: 8435826616607337010, guid: e03e896ebb4472a45a1ec684879b634b, type: 3}
-  - Name: "\uB3CC\uACE0\uB798\uC758 \uCD08\uC74C\uD30C"
-    Attack: 25
-    Health: 30
-    sprite: {fileID: -7811834608892705033, guid: e03e896ebb4472a45a1ec684879b634b, type: 3}
+    Health: 4
+    sprite: {fileID: 21300000, guid: 72f468a267ba4d346a03eda573002a35, type: 3}
+  - Name: "\uBC14\uB2E4\uB9C8\uB140"
+    Attack: 2
+    Health: 6
+    sprite: {fileID: 21300000, guid: 03f2085b0b5069e489144264250cd3cf, type: 3}
+  - Name: "\uACF5\uAE30\uC758 \uC815\uB839"
+    Attack: 4
+    Health: 4
+    sprite: {fileID: 21300000, guid: 0202cee899e31c34fae7323cf948a81a, type: 3}
+  - Name: "\uAC00\uC624\uB9AC"
+    Attack: 2
+    Health: 5
+    sprite: {fileID: 21300000, guid: 28ac0ef0bbeb35a4fabd65990500594b, type: 3}
+  - Name: "\uAC70\uBD81\uC774"
+    Attack: 3
+    Health: 4
+    sprite: {fileID: 21300000, guid: 4940b187572928a4e91fcdf28c492d78, type: 3}
+  - Name: "\uC568\uB9AC\uC2A4"
+    Attack: 5
+    Health: 6
+    sprite: {fileID: 21300000, guid: 2e0fb39b5f63c6a4684f30575608b55e, type: 3}
+  - Name: "\uCCB4\uC154 \uACE0\uC591\uC774"
+    Attack: 6
+    Health: 3
+    sprite: {fileID: 21300000, guid: 5ab30d41f03074445b23059f1b3963bc, type: 3}
+  - Name: "3\uC6D4 \uD1A0\uB07C"
+    Attack: 5
+    Health: 3
+    sprite: {fileID: 21300000, guid: 31e543132bf2062409910d6d0f2be894, type: 3}
+  - Name: "\uCE74\uB4DC\uBCD1\uC815"
+    Attack: 3
+    Health: 4
+    sprite: {fileID: 21300000, guid: ce8777a7a3c21374d8f52f8670cfc006, type: 3}
+  - Name: "\uBAA8\uC790\uC7A5\uC218"
+    Attack: 2
+    Health: 5
+    sprite: {fileID: 21300000, guid: 99f80612b5ea8134f81cfbdae9099070, type: 3}
+  - Name: "\uB3C4\uB85C\uC2DC"
+    Attack: 2
+    Health: 9
+    sprite: {fileID: 21300000, guid: a4a8bd2f5eef8194981eca06d5f6bd6f, type: 3}
+  - Name: "\uC591\uCCA0 \uB098\uBB34\uAFBC"
+    Attack: 7
+    Health: 3
+    sprite: {fileID: 21300000, guid: dba34a5c43f2d2442ab4d81a80d8beb8, type: 3}
+  - Name: "\uD5C8\uC218\uC544\uBE44"
+    Attack: 1
+    Health: 8
+    sprite: {fileID: 21300000, guid: 2d23396b15b92fc4386ba949b422c3f9, type: 3}
+  - Name: "\uAC81\uC7C1\uC774 \uC0AC\uC790"
+    Attack: 4
+    Health: 4
+    sprite: {fileID: 21300000, guid: 0bc7769923a540b4691651c217825d8b, type: 3}
+  - Name: "\uC800\uC8FC\uB97C \uAC74   \uB9C8\uB140"
+    Attack: 3
+    Health: 4
+    sprite: {fileID: 21300000, guid: efd607771b94d594ba0af1f1c8ba39af, type: 3}

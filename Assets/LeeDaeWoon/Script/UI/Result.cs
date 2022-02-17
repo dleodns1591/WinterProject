@@ -9,7 +9,10 @@ using UnityEngine.SceneManagement;
 public class Result : MonoBehaviour
 {
     [SerializeField] TMP_Text Result_TMP;
-    public Image image;
+
+    public Image Black;
+    float time = 0f;
+    float F_time = 1f;
 
     void Start() => Scale_Zero();
 
@@ -26,12 +29,45 @@ public class Result : MonoBehaviour
 
     public void ReStart()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(5);
     }
 
     public void Next()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(5);
+    }
+
+    public void Fade()
+    {
+        StartCoroutine(Fade_Flow());
+        Invoke("Next", 2.45f);
+    }
+
+    IEnumerator Fade_Flow()
+    {
+        Black.gameObject.SetActive(true);
+        time = 0f;
+        Color Alpha = Black.color;
+        while (Alpha.a < 1f)
+        {
+            time += Time.deltaTime / F_time;
+            Alpha.a = Mathf.Lerp(0, 1, time);
+            Black.color = Alpha;
+            yield return null;
+        }
+
+        time = 0f;
+        yield return new WaitForSeconds(1f);
+
+        while (Alpha.a > 0f)
+        {
+            time += Time.deltaTime / F_time;
+            Alpha.a = Mathf.Lerp(1, 0, time);
+            Black.color = Alpha;
+            yield return null;
+        }
+        Black.gameObject.SetActive(false);
+        yield return null;
     }
 
 }

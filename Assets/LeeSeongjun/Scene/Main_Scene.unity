@@ -287,6 +287,14 @@ PrefabInstance:
       propertyPath: UI_Object
       value: 
       objectReference: {fileID: 269278847}
+    - target: {fileID: 6247301271371953507, guid: 9b0b021a6fa8d1246a1bdff330a86adb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247301272490585578, guid: 9b0b021a6fa8d1246a1bdff330a86adb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7284039843961971638, guid: 9b0b021a6fa8d1246a1bdff330a86adb, type: 3}
       propertyPath: m_Name
       value: "\uD1B5\uD569\uAD00\uB9AC"

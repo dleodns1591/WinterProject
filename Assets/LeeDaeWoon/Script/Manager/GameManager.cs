@@ -50,11 +50,11 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Keypad5))
         {
-            Entity_Manager.Inst.Damage_Boss(true, 99);
+            Entity_Manager.Inst.Damage_Boss(true, 19);
         }
         if (Input.GetKeyDown(KeyCode.Keypad6))
         {
-            Entity_Manager.Inst.Damage_Boss(false, 99);
+            Entity_Manager.Inst.Damage_Boss(false, 19);
         }
     }
 
