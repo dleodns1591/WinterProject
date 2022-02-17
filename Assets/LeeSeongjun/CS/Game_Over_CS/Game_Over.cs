@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class Game_Over : MonoBehaviour
 {
-    private float fDestroyTime = 0.3f;
+    private float fDestroyTime = 0.2f;
     private float fTickTime;
 
     public Color Color;
@@ -21,7 +21,7 @@ public class Game_Over : MonoBehaviour
         fTickTime += Time.deltaTime;
         if (fTickTime >= fDestroyTime)
         {
-            color.a += 0.002f;
+            color.a += 0.008f;
             goImage.GetComponent<Image>().color = color;
         }
     }
