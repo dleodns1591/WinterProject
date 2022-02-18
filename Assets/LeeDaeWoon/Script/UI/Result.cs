@@ -17,7 +17,11 @@ public class Result : MonoBehaviour
 
     public AudioSource Book_Sound;
 
-    void Start() => Scale_Zero();
+    void Start()
+    {
+        Scale_Zero();
+        GameObject.Find("¹Ù±ù Ç¥Áö ±âº»xÁÂÇ¥ -540 , -1380").GetComponent<Main_Number>().Boss_One_Num += 1;
+    }
 
     [ContextMenu("Scale_One")]
     void Scale_One() => transform.localScale = Vector3.one;
@@ -40,12 +44,20 @@ public class Result : MonoBehaviour
         SceneManager.LoadScene(3);
     }
 
-    public void Update()
+    public void Next()
     {
-        if (GameObject.Find("Stage_test").GetComponent<Test_Stage>().Stage == 1)
+        GameObject.Find("¹Ù±ù Ç¥Áö ±âº»xÁÂÇ¥ -540 , -1380").GetComponent<Main_Number>().Map_Num += 1;
+        GameObject.Find("¹Ù±ù Ç¥Áö ±âº»xÁÂÇ¥ -540 , -1380").GetComponent<Main_Number>().Map_Night += 1;
+        if (GameObject.Find("Stage_test").GetComponent<Test_Stage>().Stage == 7)
         {
-            GameObject.Find("¹Ù±ù Ç¥Áö ±âº»xÁÂÇ¥ -540 , -1380").GetComponent<Main_Number>().Boss_One_Num += 1;
+            Destroy(GameObject.Find("ÅëÇÕ°ü¸®"));
+            SceneManager.LoadScene(4);
         }
+        else
+        {
+            SceneManager.LoadScene(3);
+        }
+
         if (GameObject.Find("Stage_test").GetComponent<Test_Stage>().Stage == 2)
         {
             GameObject.Find("¹Ù±ù Ç¥Áö ±âº»xÁÂÇ¥ -540 , -1380").GetComponent<Main_Number>().Boss_Two_Num += 1;
@@ -65,19 +77,6 @@ public class Result : MonoBehaviour
         if (GameObject.Find("Stage_test").GetComponent<Test_Stage>().Stage == 6)
         {
             GameObject.Find("¹Ù±ù Ç¥Áö ±âº»xÁÂÇ¥ -540 , -1380").GetComponent<Main_Number>().Boss_Sixteen_Num += 1;
-        }
-    }
-
-    public void Next()
-    {
-        if (GameObject.Find("Stage_test").GetComponent<Test_Stage>().Stage == 7)
-        {
-            Destroy(GameObject.Find("ÅëÇÕ°ü¸®"));
-            SceneManager.LoadScene(4);
-        }
-        else
-        {
-            SceneManager.LoadScene(3);
         }
     }
 
