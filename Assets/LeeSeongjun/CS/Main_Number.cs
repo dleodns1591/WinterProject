@@ -16,7 +16,12 @@ public class Main_Number : MonoBehaviour
     public int Boss_Three_Num = 0;
     public int Boss_Four_Num = 0;
     public int Boss_Five_Num = 0;
-    public float Boss_Sixteen_Num = 0;
+    public int Boss_Sixteen_Num = 0;
+    /// <summary>
+    /// 
+    /// </summary>
+    public int Map_Num = 1;
+    public int Map_Night = 1;
 
     private float xMove, yMove;
 
@@ -27,7 +32,15 @@ public class Main_Number : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
         Spot = 0;
         countN = 1;
-        
+        Map_Num = 1;
+        Map_Night = 1;
+        Boss_One_Num = 0;
+        Boss_Two_Num = 0;
+        Boss_Three_Num = 0;
+        Boss_Four_Num = 0;
+        Boss_Five_Num = 0;
+        Boss_Sixteen_Num = 0;
+        Long_UI_Number = 0;
     }
 
     void Update()
