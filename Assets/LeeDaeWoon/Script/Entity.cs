@@ -27,6 +27,8 @@ public class Entity : MonoBehaviour
     // 정렬을 위해 Origin_Pos를 만들어준다.
     public Vector3 Origin_Pos;
 
+    public AudioSource Card_Sound;
+
     void Start()
     {
         
@@ -77,6 +79,7 @@ public class Entity : MonoBehaviour
         // 마우스를 때고 있을 때 Entity_Manger에 있는 Entity_MouseUp 함수를 호출시킨다.
         if (isMine)
         {
+            Card_Sound.Play();
             Entity_Manager.Inst.Entity_MouseUp();
         }
     }

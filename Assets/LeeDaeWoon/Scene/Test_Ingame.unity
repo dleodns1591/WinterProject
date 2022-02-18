@@ -732,7 +732,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1257.6597, y: -533.06}
+  m_AnchoredPosition: {x: -1258, y: -533.06}
   m_SizeDelta: {x: 1.7205, y: 1.0517}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &98955218
@@ -789,7 +789,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1115,6 +1115,7 @@ MonoBehaviour:
   Attack_Able: 0
   isDie: 0
   Origin_Pos: {x: 12, y: 5, z: 131.291}
+  Card_Sound: {fileID: 0}
 --- !u!61 &134273949
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1186,7 +1187,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -2088,6 +2089,7 @@ MonoBehaviour:
   Attack_Able: 0
   isDie: 0
   Origin_Pos: {x: 0, y: 0, z: 0}
+  Card_Sound: {fileID: 0}
 --- !u!1 &533927665
 GameObject:
   m_ObjectHideFlags: 0
@@ -2338,8 +2340,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 752801236}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.34, y: 3.55, z: 0}
-  m_LocalScale: {x: 0.2582546, y: 0.2582546, z: 0.2582546}
+  m_LocalPosition: {x: 7.25, y: 2.77, z: 0}
+  m_LocalScale: {x: 0.30120233, y: 0.30120233, z: 0.30120233}
   m_Children: []
   m_Father: {fileID: 697475220}
   m_RootOrder: 3
@@ -2383,8 +2385,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 52dc89786635b894bb733cb82e42e652, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: ea770859cbc1b4b44b9913eeef27a3f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2873,7 +2875,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -3025,7 +3027,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: b4cc84999fcd81b4691ed0e8d5738e98, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3189,7 +3191,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 47dfba4db7d5e1748a5e471402733299, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3226,8 +3228,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1250793923}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.34, y: 3.55, z: 0}
-  m_LocalScale: {x: 0.2582546, y: 0.2582546, z: 0.2582546}
+  m_LocalPosition: {x: 6.9, y: 2.76, z: 0}
+  m_LocalScale: {x: 0.33833933, y: 0.33833933, z: 0.33833933}
   m_Children: []
   m_Father: {fileID: 697475220}
   m_RootOrder: 5
@@ -3271,8 +3273,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 52dc89786635b894bb733cb82e42e652, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 19b1766467e77be49b0f4b6eedd023c3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4058,6 +4060,7 @@ MonoBehaviour:
   Attack_Able: 0
   isDie: 0
   Origin_Pos: {x: -12, y: -5, z: 131.291}
+  Card_Sound: {fileID: 0}
 --- !u!1 &1530241476
 GameObject:
   m_ObjectHideFlags: 0
@@ -4220,7 +4223,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4577,7 +4580,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4684,8 +4687,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1766837077}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.34, y: 3.55, z: 0}
-  m_LocalScale: {x: 0.2582546, y: 0.2582546, z: 0.2582546}
+  m_LocalPosition: {x: 7.01, y: 2.64, z: 0}
+  m_LocalScale: {x: 0.31997743, y: 0.31997743, z: 0.31997743}
   m_Children: []
   m_Father: {fileID: 697475220}
   m_RootOrder: 4
@@ -4729,8 +4732,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fb5402bf57726484184346d306193b7b, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 5bbaff3f12bbad243beccbfe90a484f9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5712,7 +5715,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1268.71, y: -540.15}
+  m_AnchoredPosition: {x: -1268.98, y: -540.15}
   m_SizeDelta: {x: 1.7205, y: 1.0517}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2145938966
@@ -5769,7 +5772,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
