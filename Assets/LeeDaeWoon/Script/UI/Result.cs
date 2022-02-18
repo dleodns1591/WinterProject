@@ -15,6 +15,8 @@ public class Result : MonoBehaviour
     float F_time = 1f;
     public int Hp;
 
+    public AudioSource Book_Sound;
+
     void Start() => Scale_Zero();
 
     [ContextMenu("Scale_One")]
@@ -38,6 +40,34 @@ public class Result : MonoBehaviour
         SceneManager.LoadScene(3);
     }
 
+    public void Update()
+    {
+        if (GameObject.Find("Stage_test").GetComponent<Test_Stage>().Stage == 1)
+        {
+            GameObject.Find("¹Ù±ù Ç¥Áö ±âº»xÁÂÇ¥ -540 , -1380").GetComponent<Main_Number>().Boss_One_Num += 1;
+        }
+        if (GameObject.Find("Stage_test").GetComponent<Test_Stage>().Stage == 2)
+        {
+            GameObject.Find("¹Ù±ù Ç¥Áö ±âº»xÁÂÇ¥ -540 , -1380").GetComponent<Main_Number>().Boss_Two_Num += 1;
+        }
+        if (GameObject.Find("Stage_test").GetComponent<Test_Stage>().Stage == 3)
+        {
+            GameObject.Find("¹Ù±ù Ç¥Áö ±âº»xÁÂÇ¥ -540 , -1380").GetComponent<Main_Number>().Boss_Three_Num += 1;
+        }
+        if (GameObject.Find("Stage_test").GetComponent<Test_Stage>().Stage == 4)
+        {
+            GameObject.Find("¹Ù±ù Ç¥Áö ±âº»xÁÂÇ¥ -540 , -1380").GetComponent<Main_Number>().Boss_Four_Num += 1;
+        }
+        if (GameObject.Find("Stage_test").GetComponent<Test_Stage>().Stage == 5)
+        {
+            GameObject.Find("¹Ù±ù Ç¥Áö ±âº»xÁÂÇ¥ -540 , -1380").GetComponent<Main_Number>().Boss_Five_Num += 1;
+        }
+        if (GameObject.Find("Stage_test").GetComponent<Test_Stage>().Stage == 6)
+        {
+            GameObject.Find("¹Ù±ù Ç¥Áö ±âº»xÁÂÇ¥ -540 , -1380").GetComponent<Main_Number>().Boss_Sixteen_Num += 1;
+        }
+    }
+
     public void Next()
     {
         if (GameObject.Find("Stage_test").GetComponent<Test_Stage>().Stage == 7)
@@ -53,6 +83,7 @@ public class Result : MonoBehaviour
 
     public void Fade()
     {
+        Book_Sound.Play();
         StartCoroutine(Fade_Flow());
         Invoke("Next", 2.45f);
     }
