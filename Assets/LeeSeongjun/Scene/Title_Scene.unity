@@ -1998,6 +1998,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1814038823348647742, guid: 9b0b021a6fa8d1246a1bdff330a86adb, type: 3}
+      propertyPath: Map_Num
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1814038823348647742, guid: 9b0b021a6fa8d1246a1bdff330a86adb, type: 3}
+      propertyPath: Map_Night
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1814038823360968483, guid: 9b0b021a6fa8d1246a1bdff330a86adb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
