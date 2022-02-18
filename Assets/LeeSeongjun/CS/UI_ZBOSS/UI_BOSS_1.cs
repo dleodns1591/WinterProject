@@ -45,7 +45,7 @@ public class UI_BOSS_1 : MonoBehaviour
             Nomal_Boss_6.gameObject.SetActive(false);
             audioSource.Play();
         }
-        else if (oc.Boss_One_Num == 1)
+        else if (oc.Boss_One_Num >= 1)
         {
             Black_Boss_1.gameObject.SetActive(false);
             Black_Boss_2.gameObject.SetActive(false);
