@@ -8,6 +8,16 @@ public class Main_Number : MonoBehaviour
     public int Spot = 0;
     public int countN = 0;
     public int Long_UI_Number = 0;
+    /// <summary>
+    //
+    /// </summary>
+    public int Boss_One_Num = 0;
+    public int Boss_Two_Num = 0;
+    public int Boss_Three_Num = 0;
+    public int Boss_Four_Num = 0;
+    public int Boss_Five_Num = 0;
+    public float Boss_Sixteen_Num = 0;
+
     private float xMove, yMove;
 
     Vector2 opentarget = new Vector2(840, 0);
