@@ -6,7 +6,7 @@ public class MoveUI : MonoBehaviour
 {
     public GameObject rightArrow;
     public GameObject leftArrow;
-    
+
     void Start()
     {
         rightArrow.SetActive(true); //시작시 오른쪽 열림
@@ -15,6 +15,7 @@ public class MoveUI : MonoBehaviour
 
     public void UI_Move()
     {
+
         Main_Number oc = GameObject.Find("바깥 표지 기본x좌표 -540 , -1380").GetComponent<Main_Number>();
         if (oc.Spot == 0 )
         {

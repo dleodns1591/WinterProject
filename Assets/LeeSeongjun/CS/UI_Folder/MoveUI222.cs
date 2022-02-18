@@ -6,6 +6,7 @@ public class MoveUI222 : MonoBehaviour
 {
     public GameObject rightArrow;
     public GameObject leftArrow;
+
     public void UI_Move222()
     {
         Main_Number oc = GameObject.Find("¹Ù±ù Ç¥Áö ±âº»xÁÂÇ¥ -540 , -1380").GetComponent<Main_Number>();
