@@ -35,7 +35,7 @@ public class Result : MonoBehaviour
         {
             Destroy(GameObject.Find("烹钦包府"));
         }
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(3);
     }
 
     public void Next()
@@ -43,9 +43,12 @@ public class Result : MonoBehaviour
         if (GameObject.Find("Stage_test").GetComponent<Test_Stage>().Stage == 7)
         {
             Destroy(GameObject.Find("烹钦包府"));
-            SceneManager.LoadScene(5);
+            SceneManager.LoadScene(4);
         }
-        SceneManager.LoadScene(4);
+        else
+        {
+            SceneManager.LoadScene(3);
+        }
     }
 
     public void Fade()
