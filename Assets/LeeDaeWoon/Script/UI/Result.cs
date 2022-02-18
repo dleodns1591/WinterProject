@@ -13,6 +13,7 @@ public class Result : MonoBehaviour
     public Image Black;
     float time = 0f;
     float F_time = 1f;
+    public int Hp;
 
     void Start() => Scale_Zero();
 
@@ -29,12 +30,22 @@ public class Result : MonoBehaviour
 
     public void ReStart()
     {
-        SceneManager.LoadScene(5);
+        GameObject.Find("烹钦包府").GetComponent<Player_Control>().Player_HP -= 1;
+        if (GameObject.Find("烹钦包府").GetComponent<Player_Control>().Player_HP == 0)
+        {
+            Destroy(GameObject.Find("烹钦包府"));
+        }
+        SceneManager.LoadScene(4);
     }
 
     public void Next()
     {
-        SceneManager.LoadScene(5);
+        if (GameObject.Find("Stage_test").GetComponent<Test_Stage>().Stage == 7)
+        {
+            Destroy(GameObject.Find("烹钦包府"));
+            SceneManager.LoadScene(5);
+        }
+        SceneManager.LoadScene(4);
     }
 
     public void Fade()
