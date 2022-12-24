@@ -3398,7 +3398,7 @@ GameObject:
   - component: {fileID: 1687329648}
   - component: {fileID: 1687329647}
   m_Layer: 0
-  m_Name: "\uC784\uC2DC\uB85C\uACE0"
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3480,7 +3480,7 @@ GameObject:
   - component: {fileID: 1707210700}
   - component: {fileID: 1707210699}
   m_Layer: 0
-  m_Name: "\uD0C0\uC774\uD2C0\uBC30\uACBD"
+  m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
