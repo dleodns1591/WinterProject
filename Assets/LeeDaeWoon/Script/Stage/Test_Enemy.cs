@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Test_Enemy : MonoBehaviour
 {
-    public static Test_Enemy Instance;
-    public int Enemy = 1;
+    public static Test_Enemy instnace;
+    public int enemy = 1;
 
     void Start()
     {
@@ -19,13 +19,13 @@ public class Test_Enemy : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
+        if (instnace != null)
         {
-            Enemy = Instance.GetComponent<Test_Enemy>().Enemy;
+            enemy = instnace.GetComponent<Test_Enemy>().enemy;
             Destroy(this.gameObject);
             return;
         }
-        Instance = this;
+        instnace = this;
 
         DontDestroyOnLoad(this.gameObject);
     }

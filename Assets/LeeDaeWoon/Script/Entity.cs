@@ -7,7 +7,6 @@ using DG.Tweening;
 public class Entity : MonoBehaviour
 {
     [SerializeField] Item item;
-    [SerializeField] SpriteRenderer entity;
     [SerializeField] SpriteRenderer Character;
     [SerializeField] TMP_Text Name_TMP;
     [SerializeField] TMP_Text Attack_TMP;
@@ -67,30 +66,23 @@ public class Entity : MonoBehaviour
 
     private void OnMouseDown()
     {
-        // 마우스를 누르고 있을 때 Entity_Manger에 있는 Entity_MouseDown 함수를 호출시킨다.
         if(isMine)
-        {
-            Entity_Manager.Inst.Entity_MouseDown(this);
-        }
+            Entity_Manager.instance.Entity_MouseDown(this);
     }
 
     private void OnMouseUp()
     {        
-        // 마우스를 때고 있을 때 Entity_Manger에 있는 Entity_MouseUp 함수를 호출시킨다.
         if (isMine)
         {
             Card_Sound.Play();
-            Entity_Manager.Inst.Entity_MouseUp();
+            Entity_Manager.instance.Entity_MouseUp();
         }
     }
 
     private void OnMouseDrag()
     {
-        // 마우스로 드래그를 하고 있을 때 Entity_Manger에 있는 Entity_MouseDrag 함수를 호출시킨다.
         if (isMine)
-        {
-            Entity_Manager.Inst.Entity_MouseDrag();
-        }
+            Entity_Manager.instance.Entity_MouseDrag();
     }
 
     public bool Damage(int Damage)

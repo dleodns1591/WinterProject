@@ -22,16 +22,6 @@ public class Card : MonoBehaviour
     // 확대나 축소, 드래그를 하든 기본위치로 돌아와야 되기 때문에 만들어준다.
     public PRS Origin_PRS;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     public void SetUp(Item item, bool isFront)
     {
         this.item = item;
@@ -75,39 +65,25 @@ public class Card : MonoBehaviour
 
     private void OnMouseOver()
     {
-        // 마우스가 그 콜라이더 영역에 올라가 있는 상태라면 Update처럼 계속 호출한다.
         if(isFront)
-        {
-            // 앞면일 경우 Card_MouseOver을 호출한다.
-            Card_Manager.Inst.Card_MouseOver(this);
-        }
+            Card_Manager.instnace.Card_MouseOver(this);
     }
 
     private void OnMouseExit()
     {
-        // 마우스가 그 콜라이더 영역에 나온 상태라면 한 번 호출한다.
         if(isFront)
-        {
-            // 앞면일 경우 Card_MouseExit를 호출한다.
-            Card_Manager.Inst.Card_MouseExit(this);
-        }
+            Card_Manager.instnace.Card_MouseExit(this);
     }
 
     private void OnMouseDown()
     {
-        // 마우스로 누르고 있는 상태라면 호출한다.
         if(isFront)
-        {
-            Card_Manager.Inst.Card_MouseDown();
-        }
+            Card_Manager.instnace.Card_MouseDown();
     }
 
     private void OnMouseUp()
     {
-        // 마우스를 때고 있는 상태라면 호출한다.
         if (isFront)
-        {
-            Card_Manager.Inst.Card_MouseUp();
-        }
+            Card_Manager.instnace.Card_MouseUp();
     }
 }

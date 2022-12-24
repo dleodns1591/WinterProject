@@ -5,8 +5,8 @@ using DG.Tweening;
 
 public class Entity_Manager : MonoBehaviour
 {
-    public static Entity_Manager Inst { get; private set; }
-    void Awake() => Inst = this;
+    public static Entity_Manager instance { get; private set; }
+    void Awake() => instance = this;
 
     [SerializeField] GameObject Entity_Prefab;
     [SerializeField] GameObject Damage_Prefab;
@@ -27,7 +27,7 @@ public class Entity_Manager : MonoBehaviour
     bool Exist_MyEmpty_Entity => My_Entity.Exists(x => x == MyEmpty_Entity);
     int MyEmptyEntity_Index => My_Entity.FindIndex(x => x == MyEmpty_Entity);
     // CanMouse_Input은 내 턴이면서 isLoading이 false일 경우 마우스의 입력을 받을 수 있다. 라고 만들어준다.
-    bool CanMouse_Input => Turn_Manager.Inst.My_Turn && !Turn_Manager.Inst.isLoading;
+    bool CanMouse_Input => Turn_Manager.instance.My_Turn && !Turn_Manager.instance.isLoading;
     // Aim이 null이 아닐 경우 Exist_Aim이라고 한다.
     bool Exist_Aim => Target_PickEntity != null;
 
@@ -58,14 +58,12 @@ public class Entity_Manager : MonoBehaviour
         Attack_AbleReset(My_Turn);
 
         if (!My_Turn)
-        {
             StartCoroutine(AI_Co());
-        }
     }
 
     IEnumerator AI_Co()
     {
-        Card_Manager.Inst.TryPut_Card(false);
+        Card_Manager.instnace.TryPut_Card(false);
         yield return delay_1;
 
         // Attack_Able이 true인 모든 Enemy_Entity를 가져와 순서를 섞는다.
@@ -86,15 +84,13 @@ public class Entity_Manager : MonoBehaviour
             int rand = Random.Range(0, Defend.Count);
             Attack(Attacker, Defend[rand]);
 
-            if (Turn_Manager.Inst.isLoading)
-            {
+            if (Turn_Manager.instance.isLoading)
                 yield break;
-            }
 
             yield return delay_2;
         }
 
-        Turn_Manager.Inst.End_Turn();
+        Turn_Manager.instance.End_Turn();
     }
 
     private void Entity_Alignment(bool isMine)
@@ -124,15 +120,11 @@ public class Entity_Manager : MonoBehaviour
         // 이 함수는 마우스를 필드에 드래그를 했을 때 빈 GameObject가 없으면은 생성을 해주고 X좌표에 따라 리스트에 순서를 바꿔주는 역할을 한다.
         // IsFull_MyEntity가 true라면 return을 해준다. 이유는 필드에 놓을 카드가 꽉 찼기 때문에 더 이상 놓을 수 없어야 하기 때문에 return을 해준다.
         if (IsFull_MyEntity)
-        {
             return;
-        }
 
         // 만약에 나의 Entity가 존재하지 않는다면 My_Entity에 추가를 해준다.
         if (!Exist_MyEmpty_Entity)
-        {
             My_Entity.Add(MyEmpty_Entity);
-        }
 
         Vector3 Empty_EntityPos = MyEmpty_Entity.transform.position;
         Empty_EntityPos.x = xPos;
@@ -142,9 +134,7 @@ public class Entity_Manager : MonoBehaviour
         My_Entity.Sort((Entity_1, Entity_2) => Entity_1.transform.position.x.CompareTo(Entity_2.transform.position.x));
 
         if (MyEmptyEntity_Index != Empty_EntityIndex)
-        {
             Entity_Alignment(true);
-        }
     }
 
     public void Remove_MyEmpty_Entity()
@@ -152,9 +142,7 @@ public class Entity_Manager : MonoBehaviour
         // 이 함수는 Card_Manager에 Card_MouseUp 함수에 호출해준다.
         // 만약 내 Entity가 존재하지 않는다면 return을 해준다.
         if (!Exist_MyEmpty_Entity)
-        {
             return;
-        }
 
         // MyEmptyEntity_Index를 빼준다.
         // 정렬이 될 수 있도록 Entity_Alignment를 true로 해준다.
@@ -169,30 +157,22 @@ public class Entity_Manager : MonoBehaviour
         {
             // 만약 isMine일 경우 내 엔티티가 꽉 차있거나, 내 Empty_Entity가 없을 경우 return false를 해준다.
             if (IsFull_MyEntity || !Exist_MyEmpty_Entity)
-            {
                 return false;
-            }
         }
         else
         {
             // 만약 isMine이 false일 때 적의 엔티티가 꽉 차있을 경우 return false를 해준다.
             if (IsFull_EnmeyEntity)
-            {
                 return false;
-            }
         }
 
         var Entity_Object = Instantiate(Entity_Prefab, Spawn_Pos, Utill.QI);
         var Entity = Entity_Object.GetComponent<Entity>();
 
         if (isMine)
-        {
             My_Entity[MyEmptyEntity_Index] = Entity;
-        }
         else
-        {
             Enemy_Entity.Insert(Random.Range(0, Enemy_Entity.Count), Entity);
-        }
 
         Entity.isMine = isMine;
         Entity.Set_Up(item);
@@ -205,9 +185,7 @@ public class Entity_Manager : MonoBehaviour
     {
         // 만약 CanMouse_Input이 false라면 return을 해준다.
         if (!CanMouse_Input)
-        {
             return;
-        }
 
         Select_Entity = entity;
     }
@@ -215,15 +193,11 @@ public class Entity_Manager : MonoBehaviour
     public void Entity_MouseUp()
     {
         if (!CanMouse_Input)
-        {
             return;
-        }
 
         // Select_Entity, Target_PickEntity 둘다 존재하며 Attack_Able이 true여야 공격한다.
         if (Select_Entity && Target_PickEntity && Select_Entity.Attack_Able)
-        {
             Attack(Select_Entity, Target_PickEntity);
-        }
 
         // Select_Entity 와 Target_PickEntity를 null로 해준다.
         Select_Entity = null;
@@ -233,9 +207,7 @@ public class Entity_Manager : MonoBehaviour
     public void Entity_MouseDrag()
     {
         if (!CanMouse_Input || Select_Entity == null)
-        {
             return;
-        }
 
         // Enemy 타겟 엔티티 찾기
         // 타겟이 한개라도 존재하는지 확인해주기 위해 bool로 false로 만든다.
@@ -252,9 +224,7 @@ public class Entity_Manager : MonoBehaviour
         }
 
         if (!Exist_Target)
-        {
             Target_PickEntity = null;
-        }
     }
 
     public void Attack_AbleReset(bool isMine)
@@ -269,10 +239,8 @@ public class Entity_Manager : MonoBehaviour
     {
         Aim.SetActive(isShow);
         if (Exist_Aim)
-        {
             // 만약 Exist_Aim 이 true라면 Aim.transform.position을 Target_PickEntity.transform.position에 그대로 대입한다.
             Aim.transform.position = Target_PickEntity.transform.position;
-        }
     }
 
     private void Attack(Entity Attacke, Entity Defend)
@@ -309,19 +277,13 @@ public class Entity_Manager : MonoBehaviour
         foreach (var Entity in entity)
         {
             if (!Entity.isDie || Entity.isBoss_Empty)
-            {
                 // 만약 isDie가 false 이거나, isBoss_Empty이면은 continue를 실행시켜 아래 있는 코드들을 실행시키지 않고 다음 엔티티로 넘긴다.
                 continue;
-            }
 
             if (Entity.isMine)
-            {
                 My_Entity.Remove(Entity);
-            }
             else
-            {
                 Enemy_Entity.Remove(Entity);
-            }
 
             Sequence sequence = DOTween.Sequence()
                 .Append(Entity.transform.DOShakePosition(1.3f))
@@ -339,14 +301,10 @@ public class Entity_Manager : MonoBehaviour
     {
         yield return delay_2;
         if(MyBoss_Entity.isDie)
-        {
-            StartCoroutine(GameManager.Inst.GameOver(false));
-        }
+            StartCoroutine(GameManager.instnace.GameOver(false));
 
         if (EnemyBoss_Entity.isDie)
-        {
-            StartCoroutine(GameManager.Inst.GameOver(true));
-        }
+            StartCoroutine(GameManager.instnace.GameOver(true));
     }
 
     public void Damage_Boss(bool isMIne, int Damage)

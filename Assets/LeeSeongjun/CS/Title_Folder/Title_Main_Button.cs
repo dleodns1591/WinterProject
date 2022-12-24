@@ -9,11 +9,13 @@ public class Title_Main_Button : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
     }
+
     public void OnClickTitle_Main()
     {
         audioSource.Play();
         Invoke("SceneMove",0.15f);
     }
+
     void SceneMove()
     {
 

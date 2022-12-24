@@ -7,7 +7,7 @@ using DG.Tweening;
 public class Damage : MonoBehaviour
 {
     [SerializeField] TMP_Text Damage_TMP;
-    private Transform tr;
+    Transform tr;
 
     void Start()
     {
@@ -17,24 +17,17 @@ public class Damage : MonoBehaviour
     void Update()
     {
         if(tr != null)
-        {
             // 만약 tr이 null이 아닐경우 현재 위치를 tr.position에 집어넣는다.
             transform.position = tr.position;
-        }
     }
 
-    public void SetUp_Transform(Transform tr)
-    {
-        this.tr = tr;
-    }
+    public void SetUp_Transform(Transform tr) => this.tr = tr;
 
     public void Damaged(int Damage)
     {
         // 만약 데미지가 0보다 작거나 같다면 return을 해준다.
         if (Damage <= 0)
-        {
             return;
-        }
 
         GetComponent<Order>().Set_Order(1000);
         Damage_TMP.text = $"-{Damage}";

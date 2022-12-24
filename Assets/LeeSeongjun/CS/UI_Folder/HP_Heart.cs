@@ -18,6 +18,7 @@ public class HP_Heart : MonoBehaviour
     public GameObject Five_Heart_0;
 
     public GameObject UI_Object;
+
     void Update()
     {
         Player_Control oc = GameObject.Find("통합관리").GetComponent<Player_Control>();
