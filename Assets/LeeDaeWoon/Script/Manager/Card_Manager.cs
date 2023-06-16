@@ -8,8 +8,8 @@ using DG.Tweening;
 public class Card_Manager : MonoBehaviour
 {
     // 싱글톤으로 만들어 준다. 이유는 Manager는 하나만 존재하기 때문이다.
-    public static Card_Manager Inst { get; private set; }
-    void Awake() => Inst = this;
+    public static Card_Manager instnace { get; private set; }
+    void Awake() => instnace = this;
 
     [SerializeField] Item_So item_So; // Item_So를 가져오기 위하여 private로 선언을 한다.
     [SerializeField] GameObject Card_Prefab; // Card 프리팹을 참조하기 위하여 써준다.
@@ -43,10 +43,8 @@ public class Card_Manager : MonoBehaviour
     void Update()
     {
         if (isMy_CardDrag)
-        {
             // isMy_CardDrag가 true라면 Card_Drag 함수를 호출한다.
             Card_Drag();
-        }
 
         Detect_CardArea();
         Set_ECardState();
@@ -58,22 +56,19 @@ public class Card_Manager : MonoBehaviour
         Turn_Manager.OnTurn_Start -= OnTurn_Start;
     }
 
-    private void OnTurn_Start(bool My_Turn)
+    void OnTurn_Start(bool My_Turn)
     {
         if(My_Turn)
-        {
             MyPut_Count = 0;
-        }
     }
 
-    private void SetUp_ItemBuffer()
+    void SetUp_ItemBuffer()
     {
         Item_Buffer = new List<Item>(8);
         for (int i = 0; i < item_So.items.Length; i++)
         {
             Item item = item_So.items[i];
             Item_Buffer.Add(item);
-
         }
 
         // 카드가 나올 때 똑같이 나오는 순서를 방지한다.
@@ -91,16 +86,14 @@ public class Card_Manager : MonoBehaviour
         // 우리 또는 적이 카드를 뽑을 때 마다 맨 앞에 있는 index를 뽑아서 return item을 한다.
         // 이제 카드를 다 뽑고 더 이상 뽑을것이 없다면, SetUp_ItemBuffer을 호출시켜 다시 카드를 채워 넣는다.
         if (Item_Buffer.Count == 0)
-        {
             SetUp_ItemBuffer();
-        }
 
         Item item = Item_Buffer[0];
         Item_Buffer.RemoveAt(0);
         return item;
     }
 
-    private void Add_Card(bool isMine)
+    void Add_Card(bool isMine)
     {
         // 카드에 스탯을 넣기 때문에 SetUp에 PopItem을 호출한다. 그리고 isMine으로 자기자신인지 전달을 해준다. 
         var Card_Object = Instantiate(Card_Prefab, Card_SpawnPoint.position, Utill.QI);
@@ -112,7 +105,7 @@ public class Card_Manager : MonoBehaviour
         Card_Alignment(isMine);
     }
 
-    private void Set_OriginOrder(bool isMine)
+    void Set_OriginOrder(bool isMine)
     {
         // 이 함수는 order을 정렬해 주기 위한 함수
         int Count = isMine ? My_Card.Count : Enemy_Card.Count;
@@ -123,17 +116,13 @@ public class Card_Manager : MonoBehaviour
         }
     }
 
-    private void Card_Alignment(bool isMine)
+    void Card_Alignment(bool isMine)
     {
         List<PRS> Origin_CardPRS = new List<PRS>();
         if (isMine)
-        {
             Origin_CardPRS = Round_Alignment(My_CardLeft, My_CardRight, My_Card.Count, 0.5f, Vector3.one * 0.8f);
-        }
         else
-        {
             Origin_CardPRS = Round_Alignment(Enemy_CardLeft, Enemy_CardRight, Enemy_Card.Count, -0.5f, Vector3.one * 0.8f);
-        }
 
 
         // isMine이 true라면 My_Card를 정렬하는거고, false라면 Enemy_Card를 정렬한다.
@@ -211,7 +200,7 @@ public class Card_Manager : MonoBehaviour
         var Spawn_Pos = isMine ? Utill.Mouse_Pos : EnemyCard_SpawnPoint.position;
         var Target_Card = isMine ? My_Card : Enemy_Card;
 
-        if (Entity_Manager.Inst.Spawn_Entity(isMine, card.item, Spawn_Pos))
+        if (Entity_Manager.instance.Spawn_Entity(isMine, card.item, Spawn_Pos))
         {
             Target_Card.Remove(card);
             card.transform.DOKill();
@@ -281,7 +270,7 @@ public class Card_Manager : MonoBehaviour
 
         if (On_MyCardArea)
         {
-            Entity_Manager.Inst.Remove_MyEmpty_Entity();
+            Entity_Manager.instance.Remove_MyEmpty_Entity();
         }
 
         else
@@ -290,12 +279,10 @@ public class Card_Manager : MonoBehaviour
         }
     }
 
-    private void Card_Drag()
+    void Card_Drag()
     {
         if (eCard_State != ECard_State.Can_MouseDrag)
-        {
             return;
-        }
 
         // 카드 드래그 하고 있을 때 
         if (!On_MyCardArea)
@@ -303,7 +290,7 @@ public class Card_Manager : MonoBehaviour
             // On_MyCardArea가 false라면 실행한다.
             // 드래그를 해서 필드에 카드가 가있다면 그 위치를 옮겨준다.
             Select_Card.Move_Transform(new PRS(Utill.Mouse_Pos, Utill.QI, Select_Card.Origin_PRS.Scale), false);
-            Entity_Manager.Inst.Insert_MyEmptyEntity(Utill.Mouse_Pos.x);
+            Entity_Manager.instance.Insert_MyEmptyEntity(Utill.Mouse_Pos.x);
         }
     }
 
@@ -325,28 +312,26 @@ public class Card_Manager : MonoBehaviour
             card.Move_Transform(new PRS(Enlarge_Pos, Utill.QI, Vector3.one * 1f), false);
         }
         else
-        {
             card.Move_Transform(card.Origin_PRS, false);
-        }
 
         card.GetComponent<Order>().Set_MostFrontOrder(isEnlarge);
     }
 
     private void Set_ECardState()
     {
-        if (Turn_Manager.Inst.isLoading)
+        if (Turn_Manager.instance.isLoading)
         {
             // 게임이 시작되지도 않았을 때, 즉 isLoading이 true일 동안에는 Nothing으로 해둔다.
             eCard_State = ECard_State.Nothing;
         }
 
-        else if (!Turn_Manager.Inst.My_Turn || MyPut_Count == 1 || Entity_Manager.Inst.IsFull_MyEntity)
+        else if (!Turn_Manager.instance.My_Turn || MyPut_Count == 1 || Entity_Manager.instance.IsFull_MyEntity)
         {
             // 내 턴이 아니라면 마우스만 올릴 수 있다.
             eCard_State = ECard_State.Can_MouseOver;
         }
 
-        else if (Turn_Manager.Inst.My_Turn && MyPut_Count == 0)
+        else if (Turn_Manager.instance.My_Turn && MyPut_Count == 0)
         {
             // 내 턴일 동안에는 카드를 드래그 할 수 있다.
             eCard_State = ECard_State.Can_MouseDrag;

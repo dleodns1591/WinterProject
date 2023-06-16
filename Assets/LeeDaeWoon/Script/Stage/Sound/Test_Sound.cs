@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Test_Sound : MonoBehaviour
 {
-    public static Test_Sound Instance;
-    public int Sound = 1;
+    public static Test_Sound instance;
+    public int sound = 1;
 
     void Start()
     {
@@ -19,13 +19,13 @@ public class Test_Sound : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
+        if (instance != null)
         {
-            Sound = Instance.GetComponent<Test_Sound>().Sound;
+            sound = instance.GetComponent<Test_Sound>().sound;
             Destroy(this.gameObject);
             return;
         }
-        Instance = this;
+        instance = this;
 
         DontDestroyOnLoad(this.gameObject);
     }

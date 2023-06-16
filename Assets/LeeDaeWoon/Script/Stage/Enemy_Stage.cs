@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Enemy_Stage : MonoBehaviour
 {
-    public int Enemy;
+    public int enemy;
 
     public void Awake()
     {
-        Enemy = GameObject.Find("Enemy_test").GetComponent<Test_Enemy>().Enemy;
-        this.transform.GetChild(Enemy - 1).gameObject.SetActive(true);
+        enemy = GameObject.Find("Enemy_test").GetComponent<Test_Enemy>().enemy;
+        this.transform.GetChild(enemy - 1).gameObject.SetActive(true);
     }
 
     public void Update()
@@ -19,7 +19,7 @@ public class Enemy_Stage : MonoBehaviour
 
     public void Next_Stage()
     {
-        GameObject.Find("Enemy_test").GetComponent<Test_Enemy>().Enemy += 1;
+        GameObject.Find("Enemy_test").GetComponent<Test_Enemy>().enemy += 1;
         Destroy(this.gameObject);
     }
 }

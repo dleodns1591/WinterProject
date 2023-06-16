@@ -1103,7 +1103,6 @@ MonoBehaviour:
     Attack: 0
     Health: 0
     sprite: {fileID: 0}
-  entity: {fileID: 0}
   Character: {fileID: 0}
   Name_TMP: {fileID: 0}
   Attack_TMP: {fileID: 0}
@@ -1185,7 +1184,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2aaf04583d5c6d540acf39c77214afd5, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1312,7 +1311,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 69c802fc779808747ba9d1d107b11e8b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1501,7 +1500,7 @@ Transform:
   - {fileID: 802127358}
   - {fileID: 53687882}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &231475012
 GameObject:
@@ -2034,7 +2033,7 @@ Transform:
   - {fileID: 2090904072}
   - {fileID: 1421065120}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &490195776
 GameObject:
@@ -2174,7 +2173,6 @@ MonoBehaviour:
     Attack: 0
     Health: 0
     sprite: {fileID: 0}
-  entity: {fileID: 0}
   Character: {fileID: 0}
   Name_TMP: {fileID: 0}
   Attack_TMP: {fileID: 0}
@@ -2360,7 +2358,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &697475219
 GameObject:
@@ -2397,7 +2395,7 @@ Transform:
   - {fileID: 1766837078}
   - {fileID: 1250793924}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &697475221
 MonoBehaviour:
@@ -2411,7 +2409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dfaf1243dff5834abc7504a7d68d2b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemy: 0
+  enemy: 0
 --- !u!1 &752801236
 GameObject:
   m_ObjectHideFlags: 0
@@ -3068,7 +3066,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 475676fe4639999429b688c4fb1f36ca, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3288,9 +3286,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: -100
+  m_SortingLayerID: -1212703109
+  m_SortingLayer: -1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 599455daa192b424083964634df66c9e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3314,7 +3312,7 @@ Transform:
   m_LocalScale: {x: 0.9259869, y: 0.9259869, z: 0.9259869}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1227735121
 GameObject:
@@ -3687,7 +3685,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1327801324
 GameObject:
@@ -3718,7 +3716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5067950678a54854abb13e2260e3a78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemy: 1
+  enemy: 1
 --- !u!4 &1327801326
 Transform:
   m_ObjectHideFlags: 0
@@ -3731,7 +3729,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1364029775
 GameObject:
@@ -3768,7 +3766,7 @@ Transform:
   - {fileID: 185189867}
   - {fileID: 1600194887}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1364029777
 MonoBehaviour:
@@ -3829,7 +3827,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1391103455
 GameObject:
@@ -3977,7 +3975,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1421065118
 GameObject:
@@ -4142,7 +4140,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1517240980
 GameObject:
@@ -4244,7 +4242,6 @@ MonoBehaviour:
     Attack: 0
     Health: 0
     sprite: {fileID: 0}
-  entity: {fileID: 0}
   Character: {fileID: 0}
   Name_TMP: {fileID: 0}
   Attack_TMP: {fileID: 0}
@@ -4306,7 +4303,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1562394488
 GameObject:
@@ -4372,7 +4369,7 @@ Transform:
   - {fileID: 1562394489}
   - {fileID: 231475013}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1578059691
 GameObject:
@@ -4417,7 +4414,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ab4559fe3ae355046a63e20df4cbe936, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -4714,7 +4711,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ea9f72a981c771244ab2d97e990a160b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4826,7 +4823,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1708914227
 GameObject:
@@ -4871,7 +4868,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 60729e8b4047b2647a4f790fd47a89d7, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -5230,7 +5227,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1890335516
 MonoBehaviour:
@@ -5244,7 +5241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1997eb51057c9c04d8d21b540a7510ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sound: 1
+  sound: 1
 --- !u!1 &1893935401
 GameObject:
   m_ObjectHideFlags: 0
@@ -5317,7 +5314,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1946915458
 GameObject:
@@ -5613,7 +5610,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2069119388
 GameObject:
@@ -5885,7 +5882,7 @@ RectTransform:
   - {fileID: 2069119389}
   - {fileID: 1946915459}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

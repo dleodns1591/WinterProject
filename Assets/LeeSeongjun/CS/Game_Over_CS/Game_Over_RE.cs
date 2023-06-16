@@ -12,6 +12,9 @@ public class Game_Over_RE : MonoBehaviour
     }
     public void OnClickTitle_Main()
     {
+        Destroy(GameObject.Find("Stage_test"));
+        Destroy(GameObject.Find("Enemy_test"));
+        Destroy(GameObject.Find("AudioSound_test"));
         audioSource.Play();
         Invoke("SceneMove", 0.15f);
     }

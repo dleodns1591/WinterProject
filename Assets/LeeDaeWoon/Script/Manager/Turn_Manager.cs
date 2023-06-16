@@ -8,8 +8,8 @@ using Random = UnityEngine.Random;
 public class Turn_Manager : MonoBehaviour
 {
     // 싱글톤을 만들어준다.
-    public static Turn_Manager Inst { get; private set; }
-    void Awake() => Inst = this;
+    public static Turn_Manager instance { get; private set; }
+    void Awake() => instance = this;
 
     // Debelop에 Tootip을 달아줘서 마우스를 올려다 놓으면 Tooltip에 써놓은 글자가 나온다.
     [Header("Develop")]
@@ -74,10 +74,8 @@ public class Turn_Manager : MonoBehaviour
         isLoading = true;
 
         if(My_Turn)
-        {
             // 내 턴일 경우 GameManger Inst를 통해 Notification을 나의 턴이라고 넘겨준다.
-            GameManager.Inst.Notification("나의 턴");
-        }
+            GameManager.instnace.Notification("나의 턴");
 
         yield return delay_07; // 0.7초 대기
         OnAdd_Card?.Invoke(My_Turn); // 내 턴이라면 카드르 한 장 추가해주고, 상대 턴이라면 상대한테 카드를 한 장 추가해준다.   
